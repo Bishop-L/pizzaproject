@@ -17,15 +17,15 @@ public class ToppingPrices {
 
     static {
         PRICES.put(ToppingType.CHEESE, 1.0);
-        PRICES.put(ToppingType.PEPPERONI, 1.0);
-        PRICES.put(ToppingType.HAM, 1.0);
-        PRICES.put(ToppingType.SAUSAGE, 1.0);
-        PRICES.put(ToppingType.BACON, 1.0);
-        PRICES.put(ToppingType.MUSHROOMS, 0.5);
-        PRICES.put(ToppingType.OLIVES, 0.5);
-        PRICES.put(ToppingType.ONIONS, 0.5);
-        PRICES.put(ToppingType.PEPPERS, 0.5);
-        PRICES.put(ToppingType.PINEAPPLES, 0.5);
+        PRICES.put(ToppingType.PEPPERONI, 1.5);
+        PRICES.put(ToppingType.HAM, 1.5);
+        PRICES.put(ToppingType.SAUSAGE, 1.5);
+        PRICES.put(ToppingType.BACON, 1.5);
+        PRICES.put(ToppingType.MUSHROOMS, 1.0);
+        PRICES.put(ToppingType.OLIVES, 1.0);
+        PRICES.put(ToppingType.ONIONS, 1.0);
+        PRICES.put(ToppingType.PEPPERS, 1.0);
+        PRICES.put(ToppingType.PINEAPPLES, 1.0);
     }
 
     static {

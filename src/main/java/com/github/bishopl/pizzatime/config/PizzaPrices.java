@@ -13,8 +13,8 @@ public class PizzaPrices {
     
     static {
         BASE_PRICE.put(PizzaSize.SMALL, 4.0);
-        BASE_PRICE.put(PizzaSize.MEDIUM, 7.0);
-        BASE_PRICE.put(PizzaSize.LARGE, 9.0);
+        BASE_PRICE.put(PizzaSize.MEDIUM, 9.0);
+        BASE_PRICE.put(PizzaSize.LARGE, 14.0);
     }
 
     /**
