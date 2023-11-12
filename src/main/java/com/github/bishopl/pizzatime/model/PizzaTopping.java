@@ -21,16 +21,14 @@ public class PizzaTopping {
      * @param toppingType the type of topping
      */
     public PizzaTopping(ToppingType toppingType) {
-        this.toppingType = toppingType;
-        this.toppingAmount = ToppingAmount.REGULAR;
+        this(toppingType, ToppingAmount.REGULAR);
     }
 
     /**
      * Constructs a new PizzaTopping with the default type (cheese) and a regular amount.
      */
     public PizzaTopping() {
-        this.toppingType = ToppingType.CHEESE;
-        this.toppingAmount = ToppingAmount.REGULAR;
+        this(ToppingType.CHEESE, ToppingAmount.REGULAR);
     }
 
     /**
