@@ -56,4 +56,22 @@ public class PizzaTopping {
         this.toppingAmount = toppingAmount;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     * We only care about toppingType, not toppingAmount.
+     * 
+     * @param obj the reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof PizzaTopping)) {
+            return false;
+        }
+        PizzaTopping other = (PizzaTopping) obj;
+        return this.toppingType == other.toppingType;
+    }
 }
