@@ -54,6 +54,15 @@ public class ToppingPrices {
         return getPrice(toppingType, ToppingAmount.REGULAR);
     }
 
+    /**
+     * Returns the multiplier for a given ToppingAmount.
+     *
+     * @param toppingAmount the ToppingAmount to get the multiplier for
+     * @return the multiplier for the given ToppingAmount
+     */
+    private static double getMultiplier(ToppingAmount toppingAmount) {
+        return MULTIPLIERS.get(toppingAmount);
+    }
     
     /**
      * Sets the price for a given ToppingType.
@@ -61,19 +70,10 @@ public class ToppingPrices {
      * @param toppingType the ToppingType to set the price for
      * @param price the price to set for the ToppingType
      */
-    public static void setPrice(ToppingType toppingType, double price) {
-        PRICES.put(toppingType, price);
-    }
+    // public static void setPrice(ToppingType toppingType, double price) {
+    //     PRICES.put(toppingType, price);
+    // }
 
-    /**
-     * Returns the multiplier for a given ToppingAmount.
-     *
-     * @param toppingAmount the ToppingAmount to get the multiplier for
-     * @return the multiplier for the given ToppingAmount
-     */
-    public static double getMultiplier(ToppingAmount toppingAmount) {
-        return MULTIPLIERS.get(toppingAmount);
-    }
 
     /**
      * Sets the multiplier for a given ToppingAmount.
@@ -81,8 +81,8 @@ public class ToppingPrices {
      * @param toppingAmount the ToppingAmount to set the multiplier for
      * @param multiplier the multiplier to set for the ToppingAmount
      */
-    public static void setMultiplier(ToppingAmount toppingAmount, double multiplier) {
-        MULTIPLIERS.put(toppingAmount, multiplier);
-    }
+    // public static void setMultiplier(ToppingAmount toppingAmount, double multiplier) {
+    //     MULTIPLIERS.put(toppingAmount, multiplier);
+    // }
   
 }
