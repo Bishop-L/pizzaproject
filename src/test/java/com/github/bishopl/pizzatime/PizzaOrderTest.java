@@ -2,13 +2,8 @@ package com.github.bishopl.pizzatime;
 
 import com.github.bishopl.pizzatime.model.Pizza;
 import com.github.bishopl.pizzatime.model.PizzaOrder;
-import com.github.bishopl.pizzatime.model.PizzaSize;
-import com.github.bishopl.pizzatime.model.PizzaTopping;
-import com.github.bishopl.pizzatime.model.ToppingAmount;
-import com.github.bishopl.pizzatime.model.ToppingType;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.util.ArrayList;
 import java.util.Date;
