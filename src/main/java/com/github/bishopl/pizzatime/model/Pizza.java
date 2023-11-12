@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Pizza {
-    PizzaSize pizzaSize;
-    List<PizzaTopping> toppings;
+    private PizzaSize pizzaSize;
+    private List<PizzaTopping> toppings;
 
     /**
      * Constructs a new Pizza of a certain size and with a list of PizzaToppings.
