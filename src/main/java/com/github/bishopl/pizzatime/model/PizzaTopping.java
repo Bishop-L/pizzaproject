@@ -1,7 +1,8 @@
-package com.github.bishopl.pizzatime.model;
 /**
  * Represents a topping for a pizza, with a type and amount.
  */
+package com.github.bishopl.pizzatime.model;
+
 public class PizzaTopping {
     private ToppingType toppingType;
     private ToppingAmount toppingAmount;
