@@ -60,8 +60,8 @@ public class PizzaOrder {
      * Returns the id of the pizza order.
      * @return the id of the pizza order
      */
-    public void getId(long id) {
-        this.id = id;
+    public long getId() {
+        return this.id;
     }
 
     /**
