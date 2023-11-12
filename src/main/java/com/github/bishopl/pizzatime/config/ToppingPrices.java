@@ -3,6 +3,7 @@ package com.github.bishopl.pizzatime.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.bishopl.pizzatime.model.PizzaTopping;
 import com.github.bishopl.pizzatime.model.ToppingType;
 import com.github.bishopl.pizzatime.model.ToppingAmount;
 
@@ -32,7 +33,8 @@ public class ToppingPrices {
         MULTIPLIERS.put(ToppingAmount.REGULAR, 1.0);
         MULTIPLIERS.put(ToppingAmount.EXTRA, 1.5);
     }    
-    
+       
+      
     /**
      * Calculates the price of a topping based on its type and amount.
      * @param toppingType the type of topping
@@ -41,6 +43,16 @@ public class ToppingPrices {
      */
     public static double getPrice(ToppingType toppingType, ToppingAmount toppingAmount) {
         return PRICES.get(toppingType) * getMultiplier(toppingAmount);
+    }
+
+    /**
+     * Returns the price of a pizza topping based on its type and amount.
+     *
+     * @param topping the PizzaTopping object containing the topping type and amount
+     * @return the price of the topping
+     */
+    public static double getPrice(PizzaTopping topping) {
+        return getPrice(topping.getToppingType(), topping.getToppingAmount());
     }
 
     /**
