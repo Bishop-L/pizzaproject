@@ -1,3 +1,8 @@
+/**
+ * This class represents the REST API endpoints for managing pizza orders.
+ * It provides methods for retrieving, creating, updating, and deleting pizza orders, pizzas, and toppings.
+ * The endpoints are versioned under "/v1/app/orders".
+ */
 package com.github.bishopl.pizzatime.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import com.github.bishopl.pizzatime.model.Pizza;
 import com.github.bishopl.pizzatime.model.PizzaOrder;
@@ -35,9 +39,19 @@ public class PizzaOrderController {
         this.pizzaOrderCounterService = pizzaOrderCounterService;
     }
 
-    /*
-    * Orders
-    */
+    
+    
+    
+    /***************************************
+    * Orders                               *
+    *****************************************/
+
+    /**
+     * Retrieves a pizza order by its ID.
+     *
+     * @param orderId the ID of the pizza order to retrieve
+     * @return a ResponseEntity containing the pizza order if found, or a 404 Not Found status if not found
+     */
     @GetMapping("/{orderId}")
     public ResponseEntity<PizzaOrder> getPizzaOrderById(@PathVariable Long orderId) {
         PizzaOrder pizzaOrder = pizzaOrderService.getPizzaOrderById(orderId);
@@ -48,6 +62,12 @@ public class PizzaOrderController {
         }
     }
 
+    /**
+     * Creates a new pizza order.
+     *
+     * @param pizzaOrder the pizza order to create
+     * @return a ResponseEntity containing the created pizza order and a 201 Created status
+     */
     @PostMapping
     public ResponseEntity<PizzaOrder> createPizzaOrder(@RequestBody List<Pizza> pizzaOrder) {
         long id = pizzaOrderCounterService.getNextOrderNumber();
@@ -55,6 +75,13 @@ public class PizzaOrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
     }
 
+    /**
+     * Updates a pizza order.
+     *
+     * @param orderId    the ID of the pizza order to update
+     * @param pizzaOrder the pizza order to update
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @PostMapping("/{orderId}/checkout")
     public ResponseEntity<PizzaOrder> checkoutOrder(@PathVariable Long orderId) {
         PizzaOrder checkedOutOrder = pizzaOrderService.checkout(orderId);
@@ -66,6 +93,12 @@ public class PizzaOrderController {
         return ResponseEntity.ok(checkedOutOrder);
     }
 
+    /**
+     * Deletes a pizza order.
+     *
+     * @param orderId the ID of the pizza order to delete
+     * @return a ResponseEntity with a 204 No Content status if the pizza order was deleted, or a 404 Not Found status if not found
+     */
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deletePizzaOrder(@PathVariable Long orderId) {
         boolean deleted = pizzaOrderService.deletePizzaOrder(orderId);
@@ -76,9 +109,18 @@ public class PizzaOrderController {
         }
     }
 
-    /*
-    * Pizzas
-    */
+
+    /***************************************
+    * Pizza                                *
+    *****************************************/
+    
+    /**
+     * Retrieves all pizzas in an order
+     *
+     * @param orderId   the ID of the pizza order to retrieve
+     * @param pizzaIndex the index of the pizza to retrieve
+     * @return a ResponseEntity containing the pizza if found, or a 404 Not Found status if not found
+     */
     @GetMapping("/{orderId}/pizzas")
     public ResponseEntity<List<Pizza>> getPizzas(@PathVariable Long orderId) {
         if (!pizzaOrderService.isValidPizzaOrder(orderId)) {
@@ -87,6 +129,13 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.getPizzas(orderId));
     }
 
+    /**
+     * Retrieves a pizza by its ID.
+     *
+     * @param orderId   the ID of the pizza order to retrieve
+     * @param pizzaIndex the index of the pizza to retrieve
+     * @return a ResponseEntity containing the pizza if found, or a 404 Not Found status if not found
+     */
     @GetMapping("/{orderId}/pizzas/{pizzaIndex}")
     public ResponseEntity<Pizza> getPizzaById(
             @PathVariable Long orderId,
@@ -98,6 +147,13 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.getPizzaById(orderId, pizzaIndex));
     }
 
+    /**
+     * Creates a new pizza.
+     *
+     * @param orderId   the ID of the pizza order to create the pizza in
+     * @param pizzaIndex the index of the pizza to create
+     * @return a ResponseEntity containing the created pizza and a 201 Created status
+     */
     @PostMapping("/{orderId}/pizzas/{pizzaIndex}")
     public ResponseEntity<PizzaOrder> createPizza(@PathVariable Long orderId){
         if (!pizzaOrderService.isValidPizzaOrder(orderId)) {
@@ -106,6 +162,13 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.createPizza(orderId));
     }
 
+    /**
+     * Deletes a pizza.
+     *
+     * @param orderId   the ID of the pizza order to delete the pizza from
+     * @param pizzaIndex the index of the pizza to delete
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @DeleteMapping("/{orderId}/pizzas/{pizzaIndex}")
     public ResponseEntity<PizzaOrder>  deletePizza(
             @PathVariable Long orderId,
@@ -117,6 +180,14 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.deletePizza(orderId, pizzaIndex));
     }
 
+    /**
+     * Updates a pizza's size, only attribute we update for now.
+     *
+     * @param orderId   the ID of the pizza order to update the pizza in
+     * @param pizzaIndex the index of the pizza to update
+     * @param pizzaSize the new size of the pizza
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @PatchMapping("/{orderId}/pizzas/{pizzaIndex}")
     public ResponseEntity<PizzaOrder> updatePizza(
             @PathVariable Long orderId,
@@ -129,9 +200,18 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.updatePizzaSize(orderId, pizzaIndex, pizzaSize));
     }
 
-    /*
-    * Toppings
-    */
+
+    /***************************************
+    * Topping                              *
+    *****************************************/
+
+    /**
+     * Retrieves all toppings on a pizza.
+     *
+     * @param orderId   the ID of the pizza order to retrieve the pizza from
+     * @param pizzaIndex the index of the pizza to retrieve the toppings from
+     * @return a ResponseEntity containing the toppings if found, or a 404 Not Found status if not found
+     */
     @GetMapping("/{orderId}/pizzas/{pizzaIndex}/toppings")
     public ResponseEntity<List<PizzaTopping>> getPizzaToppings(
             @PathVariable Long orderId,
@@ -144,6 +224,14 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.getPizzaToppings(orderId, pizzaIndex));
     }
 
+    /**
+     * Adds a topping to a pizza.
+     *
+     * @param orderId   the ID of the pizza order to add the topping to
+     * @param pizzaIndex the index of the pizza to add the topping to
+     * @param newTopping the topping to add
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @PostMapping("/{orderId}/pizzas/{pizzaIndex}/toppings")
     public ResponseEntity<PizzaOrder> addPizzaTopping(
             @PathVariable Long orderId,
@@ -157,6 +245,14 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.addPizzaTopping(orderId, pizzaIndex, newTopping));
     }
     
+    /**
+     * Removes a topping from a pizza.
+     *
+     * @param orderId   the ID of the pizza order to remove the topping from
+     * @param pizzaIndex the index of the pizza to remove the topping from
+     * @param removedTopping the topping to remove
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @DeleteMapping("/{orderId}/pizzas/{pizzaIndex}/toppings")
     public ResponseEntity<PizzaOrder> deletePizzaTopping(
             @PathVariable Long orderId,
@@ -170,7 +266,14 @@ public class PizzaOrderController {
         return ResponseEntity.ok(pizzaOrderService.removePizzaTopping(orderId, pizzaIndex, removedTopping));
     }
     
-    
+    /**
+     * Updates a pizza's toppings.
+     *
+     * @param orderId   the ID of the pizza order to update the pizza in
+     * @param pizzaIndex the index of the pizza to update
+     * @param updatedToppings the new toppings of the pizza
+     * @return a ResponseEntity containing the updated pizza order if found, or a 404 Not Found status if not found
+     */
     @PatchMapping("/{orderId}/pizzas/{pizzaIndex}/toppings")
     public ResponseEntity<PizzaOrder> updatePizzaToppings(
             @PathVariable Long orderId,
