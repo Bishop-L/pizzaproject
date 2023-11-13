@@ -3,8 +3,13 @@
  */
 package com.github.bishopl.pizzatime.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PizzaTopping {
+    @JsonProperty("type")
     private ToppingType toppingType;
+    
+    @JsonProperty("amount")
     private ToppingAmount toppingAmount;
 
     /**
