@@ -64,4 +64,31 @@ public class PizzaTest {
         pizza.removeTopping(topping);
         assertFalse(pizza.getToppings().contains(topping));
     }
+
+    @Test
+    public void testAddTopping_existingTopping() {
+        Pizza pizza = new Pizza(PizzaSize.MEDIUM);
+        PizzaTopping topping = new PizzaTopping(ToppingType.MUSHROOMS, ToppingAmount.EXTRA);
+        pizza.addTopping(topping);
+        assertTrue(pizza.getToppings().contains(topping));
+
+        // Adding the same topping with a different amount should update the amount
+        PizzaTopping updatedTopping = new PizzaTopping(ToppingType.MUSHROOMS, ToppingAmount.LIGHT);
+        pizza.addTopping(updatedTopping);
+        assertEquals(2, pizza.getToppings().size()); // Cheese is aready on the pizza, so there should be 2 toppings
+        assertEquals("LIGHT", pizza.getToppings().get(1).getToppingAmount().name());
+    }
+
+    @Test
+    public void testAddTopping_newTopping() {
+        Pizza pizza = new Pizza(PizzaSize.MEDIUM);
+        PizzaTopping topping = new PizzaTopping(ToppingType.MUSHROOMS, ToppingAmount.EXTRA);
+        pizza.addTopping(topping);
+        assertTrue(pizza.getToppings().contains(topping));
+
+        PizzaTopping newTopping = new PizzaTopping(ToppingType.OLIVES, ToppingAmount.EXTRA);
+        pizza.addTopping(newTopping);
+        assertTrue(pizza.getToppings().contains(newTopping));
+        assertEquals(3, pizza.getToppings().size()); // Cheese is aready on the pizza, so there should be 3 toppings
+    }
 }
