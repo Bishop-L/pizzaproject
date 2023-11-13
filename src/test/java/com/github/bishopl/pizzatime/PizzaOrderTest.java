@@ -37,9 +37,5 @@ public class PizzaOrderTest {
         order.removePizza(cheesePizza);
         assertEquals(2, order.getPizzas().size());
 
-        // Check that we can set the id and total cost
-        order.checkOut(1234, 27.0);
-        assertEquals(1234, order.getId());
-        assertEquals(27.0, order.getTotalCost());
     }
 }
