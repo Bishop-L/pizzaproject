@@ -17,7 +17,7 @@ public class PizzaOrder {
      * Constructs a new PizzaOrder with an empty list of pizzas and a date of the current time.
      */
     public PizzaOrder() {
-        this.id = -1; // -1 means order has not been placed
+        this.id = -1;
         this.date = new Date();
         this.pizzas = new ArrayList<>();
         this.totalCost = 0.0;
@@ -28,6 +28,15 @@ public class PizzaOrder {
      */
     public PizzaOrder(List<Pizza> pizzas){
         this();
+        this.pizzas = pizzas;
+    }
+
+    /**
+     * Constructs a new PizzaOrder with a list of pizzas, current date, and global id.
+     */
+    public PizzaOrder(long id, List<Pizza> pizzas){
+        this();
+        this.id = id;
         this.pizzas = pizzas;
     }
     
@@ -98,12 +107,10 @@ public class PizzaOrder {
     }
 
     /**
-     * Once the order is complete, we can add id and total cost to the order
-     * @param id
+     * Once the order is complete, we'll add totalCost to the order.
      * @param totalCost
      */
-    public void checkOut(long id, double totalCost) {
-        setId(id);
+    public void checkOut(double totalCost) {
         setTotalCost(totalCost);
     }
 
