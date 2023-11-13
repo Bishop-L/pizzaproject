@@ -6,9 +6,6 @@ package com.github.bishopl.pizzatime.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Pizza {
     private PizzaSize pizzaSize;
     private List<PizzaTopping> toppings;
@@ -19,8 +16,7 @@ public class Pizza {
      * @param pizzaSize the size of the pizza
      * @param toppings  the list of toppings on the pizza
      */
-    @JsonCreator
-    public Pizza(@JsonProperty("size") PizzaSize pizzaSize, @JsonProperty("toppings") List<PizzaTopping> toppings) {
+    public Pizza(PizzaSize pizzaSize, List<PizzaTopping> toppings) {
         this.pizzaSize = pizzaSize;
         this.toppings = toppings;
     }
@@ -76,6 +72,18 @@ public class Pizza {
             existingTopping.setToppingAmount(topping.getToppingAmount());
         } else {
             toppings.add(topping);
+        }
+    }
+
+    /**
+     * Adds a topping to the pizza. If the topping already exists, updates its
+     * amount.
+     * 
+     * @param toppings a list of toppings to add or update
+     */
+    public void setTopping(List<PizzaTopping> toppings) {
+        for(PizzaTopping t : toppings) {
+            addTopping(t);
         }
     }
 
