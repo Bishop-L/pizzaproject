@@ -11,8 +11,8 @@ public class PizzaPricesTest {
     @Test
     public void testGetBasePrice() {
         assertEquals(4.0, PizzaPrices.getBasePrice(PizzaSize.SMALL));
-        assertEquals(7.0, PizzaPrices.getBasePrice(PizzaSize.MEDIUM));
-        assertEquals(9.0, PizzaPrices.getBasePrice(PizzaSize.LARGE));
+        assertEquals(9.0, PizzaPrices.getBasePrice(PizzaSize.MEDIUM));
+        assertEquals(14.0, PizzaPrices.getBasePrice(PizzaSize.LARGE));
     }
     
 }

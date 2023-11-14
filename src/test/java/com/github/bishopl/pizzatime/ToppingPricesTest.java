@@ -13,9 +13,9 @@ public class ToppingPricesTest {
         assertEquals(1.0, cheesePrice);
 
         double baconPrice = ToppingPrices.getPrice(ToppingType.BACON, ToppingAmount.EXTRA);
-        assertEquals(1.5, baconPrice);
+        assertEquals(2.25, baconPrice);
 
         double olivesPrice = ToppingPrices.getPrice(ToppingType.OLIVES, ToppingAmount.LIGHT);
-        assertEquals(0.25, olivesPrice);
+        assertEquals(0.5, olivesPrice);
     }
 }
