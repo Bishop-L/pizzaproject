@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="PizzaOrderController as $ctrl">
+<head>
+    <title>Pizza Time!</title>
+</head>
+<body>  
+    <div class="container">
+        <h1>Create Your Own Pizza!</h1>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="pizza-creator">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4>Choose Toppings:</h4>
+                            <table id="topping-selection">
+                                <tr ng-repeat="topping in $ctrl.availableToppings">
+                                    <td>{{topping.name}}</td>
+                                    <td>
+                                        <input type="range" min="0" max="3" ng-model="topping.amount">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Size:</h4>
+                            <select ng-model="$ctrl.pizzaOrder.pizzas[0].size" ng-options="size for size in $ctrl.pizzaSizes"></select>
+                            
+                            <div class="pizza-image">
+                                <div class="pie"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="order-section">
+                    <div ng-if="$ctrl.pizzaOrder" ng-cloak>
+                        <h2>Order #{{$ctrl.pizzaOrder.id}}</h2>
+                        <p>Date: {{$ctrl.pizzaOrder.date | date:'MM/dd/yyyy h:mm a'}}</p>
+                        
+
+                        <h3>Pizzas:</h3>
+                        <div ng-repeat="pizza in $ctrl.pizzaOrder.pizzas">
+                            <p>Size: {{pizza.size}}</p>
+                            <ul>
+                                <li ng-repeat="topping in pizza.toppings">
+                                    {{topping.type}} {{topping.amount}}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p>Total Cost: {{$ctrl.pizzaOrder.totalCost | currency}}</p>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <script src="js/pizza.js"></script>
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pizzatime.css" rel="stylesheet"/>
+</body>
+</html>
