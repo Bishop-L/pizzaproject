@@ -192,12 +192,20 @@ public class PizzaOrderController {
     public ResponseEntity<PizzaOrder> updatePizza(
             @PathVariable Long orderId,
             @PathVariable int pizzaIndex,
-            @RequestBody PizzaSize pizzaSize) {
+            @RequestBody String pizzaSize) {
         
         if (!pizzaOrderService.isValidPizza(orderId, pizzaIndex)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(pizzaOrderService.updatePizzaSize(orderId, pizzaIndex, pizzaSize));
+
+        try {
+            PizzaSize size = PizzaSize.valueOf(pizzaSize);
+
+            return ResponseEntity.ok(pizzaOrderService.updatePizzaSize(orderId, pizzaIndex, size));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(); 
+        }
+        return null;
     }
 
 
@@ -259,7 +267,7 @@ public class PizzaOrderController {
             @PathVariable int pizzaIndex,
             @RequestBody PizzaTopping removedTopping) {
         
-        if (!pizzaOrderService.isValidPizza(pizzaIndex, pizzaIndex)) {
+        if (!pizzaOrderService.isValidPizza(orderId, pizzaIndex)) {
             return ResponseEntity.notFound().build();
         }
         
@@ -280,7 +288,7 @@ public class PizzaOrderController {
             @PathVariable int pizzaIndex,
             @RequestBody List<PizzaTopping> updatedToppings) {
         
-        if (!pizzaOrderService.isValidPizza(pizzaIndex, pizzaIndex)) {
+        if (!pizzaOrderService.isValidPizza(orderId, pizzaIndex)) {
             return ResponseEntity.notFound().build();
         }
         
