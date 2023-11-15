@@ -12,7 +12,7 @@
 	<artifactId>pizzatime</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pizzatime</name>
-	<description>Demo project for Spring Boot</description>
+	<description>App for Customzing a Pizza Order</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -49,6 +49,7 @@
 				<configuration>
 					<image>
 						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+						<mainClass>com.github.bishopl.pizzatime.PizzatimeApplication</mainClass>
 					</image>
 				</configuration>
 			</plugin>
