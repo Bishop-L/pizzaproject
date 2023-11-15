@@ -77,9 +77,10 @@ app.controller('PizzaOrderController', function ($http) {
 
     // Call right api call depending on the topping amount
     $ctrl.toppingChanged = function (topping) {
-        toppingData = {};
+        var toppingData = {};
         toppingData['type'] = topping.type.toUpperCase();
-        
+        $ctrl.updatePizzaImage(topping);
+
         if(!topping.isToppingSelected){
             // Delete topping
             topping.amount = 'REGULAR';
@@ -115,6 +116,50 @@ app.controller('PizzaOrderController', function ($http) {
         $ctrl.pizzaOrder = response.data;
         $ctrl.updateAvailableToppings(response.data);
     };  
+
+    // Function for pizza image, only works for cheese and pepperoni
+    $ctrl.updatePizzaImage = function (topping) {
+            const pizzaImage = document.querySelector('.pizza-image');
+            const pie = pizzaImage.querySelector('.pie');
+        
+            function removeClasses() {
+                pie.classList.remove('pie-updated', 'pie-updated-pepperoni', 'pie-updated-pepperoni-no-cheese');
+            }
+
+            if (topping.type === 'Cheese') {
+                var peppTrue = $ctrl.availableToppings.find(t => t.type === 'Pepperoni').isToppingSelected;
+                if (!topping.isToppingSelected && peppTrue) {
+                    removeClasses();
+                    pie.classList.add('pie-updated-pepperoni-no-cheese');
+                } else if(!topping.isToppingSelected && !peppTrue){
+                    removeClasses();
+                    pie.classList.add('pie-updated');
+                } else if (topping.isToppingSelected && peppTrue) {
+                    removeClasses();
+                    pie.classList.add('pie-updated-pepperoni');                   
+                } else {
+                    removeClasses();
+                }
+            }
+        
+            if (topping.type === 'Pepperoni') {
+                var cheeseTrue = $ctrl.availableToppings.find(t => t.type === 'Cheese').isToppingSelected;
+                if (!topping.isToppingSelected && cheeseTrue) {
+                    removeClasses();
+                } else if(!topping.isToppingSelected && !cheeseTrue){
+                    removeClasses();
+                    pie.classList.add('pie-updated');
+                } else if (topping.isToppingSelected && !cheeseTrue) {
+                    removeClasses();
+                    pie.classList.add('pie-updated-pepperoni-no-cheese');
+                } else {
+                    removeClasses();
+                    pie.classList.add('pie-updated-pepperoni');
+                }
+            }
+        };
+
+        
 
 });
 

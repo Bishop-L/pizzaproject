@@ -37,6 +37,26 @@
     border-radius: 50%;
 }
 
+.pie-updated {
+    background-color: rgb(255, 38, 0);
+}
+
+.pie-updated-pepperoni {
+    width: 10em;
+    height: 10em;
+    background: url('../images/pepps.png') center center no-repeat;
+    background-color: rgb(255, 230, 0);
+    background-size: cover; 
+}
+
+.pie-updated-pepperoni-no-cheese {
+    width: 10em;
+    height: 10em;
+    background: url('../images/pepps.png') center center no-repeat;
+    background-color: rgb(255, 38, 0);
+    background-size: cover; 
+}
+
 select {
     border-radius: 5px;
 }
