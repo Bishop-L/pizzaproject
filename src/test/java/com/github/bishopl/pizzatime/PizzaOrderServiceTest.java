@@ -198,6 +198,21 @@ public class PizzaOrderServiceTest {
     }
 
     @Test
+    public void testRemovePizzaToppingDifferentAmount() {
+        List<Pizza> pizzas = new ArrayList<>();
+        PizzaTopping topping1 = new PizzaTopping(ToppingType.CHEESE);
+        PizzaTopping topping2 = new PizzaTopping(ToppingType.CHEESE, ToppingAmount.EXTRA);
+        Pizza pizza1 = new Pizza(PizzaSize.SMALL, new ArrayList<>());
+        pizza1.addTopping(topping1);
+        pizzas.add(pizza1);
+        pizzaOrderService.createPizzaOrder(1L, pizzas);
+        PizzaOrder updatedPizzaOrder = pizzaOrderService.removePizzaTopping(1L, 0, topping2);
+        assertNotNull(updatedPizzaOrder);
+        assertEquals(0, updatedPizzaOrder.getPizzas().get(0).getToppings().size());
+        assertFalse(updatedPizzaOrder.getPizzas().get(0).getToppings().contains(topping1));
+    }
+
+    @Test
     public void testUpdatePizzaToppings() {
         List<Pizza> pizzas = new ArrayList<>();
         List<PizzaTopping> toppingList = new ArrayList<>();
