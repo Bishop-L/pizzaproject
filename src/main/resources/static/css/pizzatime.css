@@ -1,6 +1,18 @@
 .pizza-creator {
     border: solid rgb(53, 65, 175) 2px;
     border-radius: 5px;
+    padding: 25px;
+    background-color: rgb(245, 247, 255);
+}
+
+.pizza-topping {
+    padding-right: 20px;
+    padding-left: 5px;
+    font-size: 20px; 
+}
+
+.topping-switch {
+    margin-bottom: -5px;
 }
 
 .order-section {
@@ -9,6 +21,8 @@
     height: 100%;
     overflow: auto; 
     font-size: 14px;
+    padding: 25px;
+    background-color: rgb(230, 232, 255);
 }
 
 .pizza-image {
@@ -21,4 +35,8 @@
     background-color: rgb(255, 230, 0);
     border: solid rgb(219, 161, 113) 5px;
     border-radius: 50%;
+}
+
+select {
+    border-radius: 5px;
 }

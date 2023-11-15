@@ -10,20 +10,31 @@
             <div class="col-md-9">
                 <div class="pizza-creator">
                     <div class="row">
-                        <div class="col-md-5">
-                            <h4>Choose Toppings:</h4>
+                        <div class="col-md-8">
+                            <h3>Choose Toppings:</h3>
                             <table id="topping-selection">
                                 <tr ng-repeat="topping in $ctrl.availableToppings">
-                                    <td>{{topping.name}}</td>
+                                    <td class="pizza-topping">{{topping.type}}</td>
                                     <td>
-                                        <input type="range" min="0" max="3" ng-model="topping.amount">
+                                        <div class="form-check form-switch topping-switch">
+                                        <input type="checkbox" class="form-check-input" ng-model="topping.isToppingSelected" ng-change="$ctrl.toppingChanged(topping)">
+                                        <select ng-model="topping.amount" ng-show="topping.isToppingSelected" ng-change="$ctrl.toppingChanged(topping)">
+                                            <option value="LIGHT">Light</option>
+                                            <option value="REGULAR">Regular</option>
+                                            <option value="EXTRA">Extra</option>
+                                        </select>
+                                    </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-md-4">
-                            <h4>Size:</h4>
-                            <select ng-model="$ctrl.pizzaOrder.pizzas[0].size" ng-options="size for size in $ctrl.pizzaSizes"></select>
+                        <div class="col-md-2">
+                            <h3>Size:</h3>
+                            <select ng-model="$ctrl.pizzaOrder.pizzas[0].size" ng-change="$ctrl.sizeChanged()">
+                                <option value="SMALL">Small</option>
+                                <option value="MEDIUM">Medium</option>
+                                <option value="LARGE">Large</option>
+                            </select>
                             
                             <div class="pizza-image">
                                 <div class="pie"></div>
@@ -51,7 +62,6 @@
 
                         <p>Total Cost: {{$ctrl.pizzaOrder.totalCost | currency}}</p>
 
-                        
                     </div>
                 </div>
             </div>
